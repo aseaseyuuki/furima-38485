@@ -17,53 +17,47 @@
 ### Association
 
 - has_many :items
-- has_one :destination
 - has_one :order
 
 
 
 ## items テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| name            | string     | null: false                    |
-| price           | string     | null: false                    |
-| description     | text       | null: false                    |
-| status          | string     | null: false                    |
-| delivery_charge | string     | null: false                    |
-| shipping_origin | string     | null: false                    |
-| shipping_days   | string     | null: false                    |
-| category        | string     | null: false                    |
-| image           | text       | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | null: false                    |
+| price              | integer    | null: false                    |
+| description        | text       | null: false                    |
+| status_id          | integer    | null: false                    |
+| delivery_charge_id | integer    | null: false                    |
+| shipping_origin_id | integer    | null: false                    |
+| shipping_day_id    | integer    | null: false                    |
+| category_id        | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 
 
 ### Association
 
 - belongs_to :user
+- has_one :order
 
 ##  destinations テーブル
 
-| Column           | Type       | Options                        | 
-| ---------------- | ---------- | ------------------------------ |
-| user             | references | null: false, foreign_key: true |
-| family_name      | string     | null: false                    |
-| first_name       | string     | null: false                    |
-| family_name_kana | string     | null: false                    |
-| first_name_kana  | string     | null: false                    |
-| post_code        | string     | null: false                    |
-| prefecture       | string     | null: false                    |
-| city             | string     | null: false                    |
-| address          | string     | null: false                    |
-| building_name    | string     |                                |
-| phone_number     | string     |                                |
+| Column             | Type       | Options                        | 
+| ------------------ | ---------- | ------------------------------ |
+| post_code          | string     | null: false                    |
+| shipping_origin_id | integer    | null: false                    |
+| city               | string     | null: false                    |
+| address            | string     | null: false                    |
+| building_name      | string     |                                |
+| phone_number       | string     | null: false                    |
 
 
 
 ### Association
 
-- belongs_to :user
+- has_one :order
 
 
 ##  orders テーブル
@@ -71,9 +65,10 @@
 | Column   | Type       | Options                        | 
 | -------- | ---------- | ------------------------------ |
 | user     | references | null: false, foreign_key: true |
-| customer | string     | null: false,                   |
-| card     | integer    | null: false,                   |
+| item_id  | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
+- belongs_to :destination
+- belongs_to :item
