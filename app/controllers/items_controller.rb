@@ -1,7 +1,9 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :correct_post,only: [:edit]
   before_action :set_tweet, only: [:show, :edit]
-  before_action :authenticate_user!, only: [:new]
-  before_action :authenticate_user!, except: [:index, :edit]
+  
   
 
   def index
@@ -46,13 +48,15 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :description, :category_id, :status_id, :delivery_charge_id, :shipping_origin_id,
                                  :shipping_day_id, :price, :image).merge(user_id: current_user.id)
   end
-<<<<<<< HEAD
-end   
-=======
 
  def set_tweet
   @item = Item.find(params[:id])
  end
 
+ def correct_post
+  @item = Item.find(params[:id])
+  unless @item.user.id != current_user.id
+   redirect_to root_path
+  end
+ end
 end
->>>>>>> 5903a2feacd082794c2f6eeae1c6aed139b8aa6a
