@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_item, only: [:show, :edit]
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :correct_post,only: [:edit]
 
   def index
@@ -25,7 +25,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-      @item = Item.find(params[:id])
      if @item.update(item_params) 
       redirect_to items_path(@item)
      else
@@ -35,7 +34,6 @@ class ItemsController < ApplicationController
 
   def show
   end
-
 
   private
 
@@ -49,8 +47,7 @@ class ItemsController < ApplicationController
  end
 
  def correct_post
-  @item = Item.find(params[:id])
-  unless user_signed_in? && current_user.id == @item.user_id
+  unless current_user.id == @item.user_id
    redirect_to root_path
   end
  end
