@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
       redirect_to items_path(@item)
      else
       render :edit
+     end 
   end
 
   def show
@@ -54,3 +55,4 @@ class ItemsController < ApplicationController
   end
  end
 end
+
