@@ -7,10 +7,10 @@ class OrderDestination
     validates :shipping_origin_id, numericality: {other_than: 0, message: "can't be blank"}
     validates :user_id
     validates :item_id
-    validates :token
     validates :city
     validates :address
     validates :phone_number, format: {with: /\d{10,11}/}, length: {maximum: 11}
+    validates :token
   end
  
   def save
