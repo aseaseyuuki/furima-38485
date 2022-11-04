@@ -9,18 +9,18 @@
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
 
-      <% if @items.present? %>
+      <%# <% if @item.order.present? %>  %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-      <% end %>
+      <%# <% end %>  %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
          ¥ <%= @item.price %>
       </span>
       <span class="item-postage">
-        <%= @item.delivery_charge_id %>
+        <%= @item.delivery_charge.name %>
       </span>
     </div>
 
@@ -46,23 +46,23 @@
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @item.category_id %></td>
+          <td class="detail-value"><%= @item.category.name %></td>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @item.status_id %></td>
+          <td class="detail-value"><%= @item.status.name %></td>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @item.delivery_charge_id %></td>
+          <td class="detail-value"><%= @item.delivery_charge.name %></td>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= @item.shipping_origin_id %></td>
+          <td class="detail-value"><%= @item.shipping_origin.name%></td>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @item.shipping_day_id%></td>
+          <td class="detail-value"><%= @item.shipping_day.name%></td>
         </tr>
       </tbody>
     </table>
@@ -101,7 +101,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <a href="#" class="another-item"><%= @item.category_id %>をもっと見る</a>
+  <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 </div>
 
 <%= render "shared/footer" %>
