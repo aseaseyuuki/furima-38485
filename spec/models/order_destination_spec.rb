@@ -60,6 +60,11 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Phone number is too long (maximum is 11 characters)"
       end
+      it 'phone_numberに半角数字以外が含まれている場合、登録できないこと' do
+        @order_destination.phone_number = 'aaa345678900'
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include "Phone number is invalid", "Phone number is too long (maximum is 11 characters)"
+      end
       it 'userが空だと保存できないこと' do
         @order_destination.user_id = ''
         @order_destination.valid?
@@ -75,11 +80,6 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Token can't be blank"
       end
-      # it "priceが空では保存ができないこと" do
-        # @order_destination.price =''
-        # @order_destination.valid?
-        # @expect(@order_address.errors.full_messages).to include("Price can't be blank")
-      # end
     end
   end
 end

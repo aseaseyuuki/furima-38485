@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
-  before_action :set_item, only: [:index, :correct_post]
+  before_action :set_item, only: [:index, :create, :correct_post]
   before_action :correct_post, only: [:index]
  
 
@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
  
   def create
     @order_destination = OrderDestination.new(order_params)
-    @item = Item.find(params[:item_id])
   if @order_destination.valid?
      pay_item
      @order_destination.save
