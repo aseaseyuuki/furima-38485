@@ -31,7 +31,7 @@ RSpec.describe OrderDestination, type: :model do
         expect(@order_destination.errors.full_messages).to include "Post code is invalid. Include hyphen(-)"
       end
       it 'shipping_originが未選択では登録できない' do
-        @order_destination.shipping_origin_id = nil
+        @order_destination.shipping_origin_id = 1
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Shipping origin can't be blank"
       end
