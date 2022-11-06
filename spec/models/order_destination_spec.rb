@@ -30,10 +30,10 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Post code is invalid. Include hyphen(-)"
       end
-      it 'shipping_originが--では登録できない' do
-        @order_destination.shipping_origin_id = 1
+      it 'shipping_originが未選択では登録できない' do
+        @order_destination.shipping_origin_id = nil
         @order_destination.valid?
-        expect( @order_destination.errors.full_messages).to include 
+        expect(@order_destination.errors.full_messages).to include "Shipping origin can't be blank"
       end
       it 'cityが空だと保存できないこと' do
         @order_destination.city = ''
@@ -50,20 +50,20 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Phone number can't be blank"
       end
-      it 'phone_numberが半角数値で10桁以下だと保存できないこと' do
-        @order_destination.phone_number = '123456789'
+      it 'phone_numberが半角数値で9桁以下だと保存できないこと' do
+        @order_destination.phone_number = '12345678'
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include "Phone number is invalid"
       end
-      it 'phone_numberが半角数値で11桁以上だと保存できないこと' do
+      it 'phone_numberが半角数値で12桁以上だと保存できないこと' do
         @order_destination.phone_number = '012345678900'
         @order_destination.valid?
-        expect(@order_destination.errors.full_messages).to include "Phone number is too long (maximum is 11 characters)"
+        expect(@order_destination.errors.full_messages).to include "Phone number is invalid"
       end
       it 'phone_numberに半角数字以外が含まれている場合、登録できないこと' do
         @order_destination.phone_number = 'aaa345678900'
         @order_destination.valid?
-        expect(@order_destination.errors.full_messages).to include "Phone number is invalid", "Phone number is too long (maximum is 11 characters)"
+        expect(@order_destination.errors.full_messages).to include "Phone number is invalid"
       end
       it 'userが空だと保存できないこと' do
         @order_destination.user_id = ''
