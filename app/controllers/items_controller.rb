@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to root_path
+      redirect_to  root_path
     else
       render :new
     end
@@ -53,7 +53,7 @@ class ItemsController < ApplicationController
  end
 
  def correct_post
-  unless current_user.id == @item.user_id
+  unless current_user.id == @item.user_id && @item.order.nil? 
    redirect_to root_path
   end
  end
