@@ -10,8 +10,8 @@ class OrdersController < ApplicationController
        redirect_to root_path
     end
   end
-
  
+  
   def create
     @order_destination = OrderDestination.new(order_params)
   if @order_destination.valid?
